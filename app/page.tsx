@@ -1,10 +1,10 @@
 import { supabase } from '@/lib/supabase'
 
 export default async function Home() {
-  const { data: events } = await supabase
-    .from('events')
-    .select('*')
-    .order('date', { ascending: true })
+ const { data: events } = await supabase
+  .from('events')
+  .select('*, venues(name, area)')
+  .order('date', { ascending: true })
 
   return (
     <main style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: "'Space Grotesk', sans-serif", fontWeight: 300 }}>
@@ -53,7 +53,7 @@ export default async function Home() {
             <div style={{ fontSize: '14px', fontWeight: 400, marginBottom: '5px' }}>{event.title}</div>
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' as const }}>
               <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>⏱ {event.start_time?.slice(0, 5)}</span>
-              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>📍 venue {event.venue_id}</span>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>📍 {event.venues?.name} · {event.venues?.area}</span>
               <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>₩ {event.price}</span>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default async function Home() {
             <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' as const }}>
               <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>📅 {event.date}</span>
               <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>⏱ {event.start_time?.slice(0, 5)}</span>
-              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>📍 venue {event.venue_id}</span>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#555' }}>📍 {event.venues?.name} · {event.venues?.area}</span>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' as const, alignItems: 'flex-end', gap: '6px' }}>
