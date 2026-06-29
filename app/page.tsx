@@ -4,6 +4,7 @@ export default async function Home() {
  const { data: events } = await supabase
   .from('events')
   .select('*, venues(name, area)')
+  .gte('date', new Date().toISOString().slice(0, 10))
   .order('date', { ascending: true })
 
   return (
@@ -65,11 +66,11 @@ export default async function Home() {
 
       {/* THIS WEEK */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '1rem 1.5rem 0.5rem', borderBottom: '0.5px solid #222' }}>
-        <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.2em', color: '#555' }}>▶ THIS WEEK</span>
-        <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#222' }}>이번 주</span>
+        <span style={{ fontFamily: "'Space Mono', monospace", fontSize: '10px', letterSpacing: '0.2em', color: '#555' }}>▶ UPCOMING</span>
+<span style={{ fontFamily: "'Space Mono', monospace", fontSize: '11px', color: '#222' }}>공연 일정</span>
       </div>
 
-      {events && events.map(event => (
+      {events && events.filter(e => e.date >= new Date().toISOString().slice(0, 10)).map(event => (
         <div key={event.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderBottom: '0.5px solid #1a1a1a', cursor: 'pointer' }}>
           <div>
             <div style={{ fontSize: '14px', fontWeight: 400, marginBottom: '5px' }}>{event.title}</div>
