@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KHH Seoul 🎤
 
-## Getting Started
+首尔韩国嘻哈（Korean Hip-Hop）演出信息聚合平台
 
-First, run the development server:
+🔗 **在线访问**: [khh-seoul.vercel.app](https://khh-seoul.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 项目背景
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+身处或计划前往首尔的海外KHH乐迷，往往难以获取地下club、独立演出等非正式场次的信息——这类信息通常只散落在艺人个人社交媒体或本地乐迷社群中。市面上的演出平台（Bandsintown、Songkick等）仅覆盖正式票务演出，地下场景存在明显的信息空白。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+KHH Seoul 致力于填补这一空白，让任何关注韩国嘻哈的乐迷，无论身处何地，都能快速查询到首尔近期（尤其是当天/本周）的演出信息。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 核心功能
 
-## Learn More
+- 📅 演出信息展示，按"今晚"与"近期"分类呈现
+- 🔍 多维度筛选：时间、区域（홍대/이태원/강남）、票价
+- 🏢 场地与艺人信息结构化管理
+- 🔐 管理员后台：演出信息的增删改查
+- ⏰ 自动化任务：保持数据库活跃
 
-To learn more about Next.js, take a look at the following resources:
+## 技术栈
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| 类型 | 技术 |
+|------|------|
+| 前端框架 | Next.js 16 (App Router) |
+| 开发语言 | TypeScript |
+| 样式 | 内联样式 + Space Mono / Space Grotesk |
+| 数据库 | Supabase (PostgreSQL) |
+| 部署 | Vercel |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 产品设计要点
 
-## Deploy on Vercel
+- **MVP范围界定**：优先聚焦信息展示，暂不开发购票跳转、社区功能等非核心模块
+- **数据获取策略**：早期采用半人工运营模式，保证信息准确性与用户信任
+- **数据结构设计**：演出（events）/场地（venues）/艺人（artists）三表结构，通过外键关联实现数据规范化
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
